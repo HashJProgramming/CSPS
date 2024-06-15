@@ -117,19 +117,19 @@ function submitLoginForm(formId) {
     $("#"+formId).submit(function(e) {
         e.preventDefault();
         var form = $(this);
-        var url = 'assets/php/functions/sign-in.php';
+        var url = 'assets/php/functions/auth/sign-in.php';
         $.ajax({
             type: 'POST',
             url: url,
             data: form.serialize(),
             success: function(data) {
                 var result = JSON.parse(data);
-                showSweetAlert(result.status.toUpperCase(), result.message, result.status, 2000);
+                showSweetAlert(result.status.toUpperCase(), result.message, result.status, 500);
                 clearForm(formId);
                 if (result.status == 'success') {
                     setTimeout(function() {
                         window.location.href = 'dashboard.php';
-                    }, 2000);
+                    }, 500);
                 }
             },
             error: function(data) {

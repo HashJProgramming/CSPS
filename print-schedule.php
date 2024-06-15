@@ -1,5 +1,5 @@
 <?php
-require_once 'assets/php/functions/authentication.php';
+require_once 'assets/php/functions/auth/authentication.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">

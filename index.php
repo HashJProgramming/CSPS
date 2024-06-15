@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (isset($_SESSION['authenticated']) || $_SESSION['authenticated']) {
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
     header('Location: dashboard.php');
 }
 ?>
@@ -51,15 +51,15 @@ if (isset($_SESSION['authenticated']) || $_SESSION['authenticated']) {
                                             </div>
                                             <form id="sign-in-form">
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" type="text" placeholder="username" name="username">
+                                                    <input class="form-control" type="text" placeholder="username" name="username" value="<?php echo isset($_COOKIE['username']) ? $_COOKIE['username'] : ''; ?>">
                                                     <label class="form-label" for="floatingInput">Username</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" type="password" placeholder="password" name="password">
+                                                    <input class="form-control" type="password" placeholder="password" name="password" value="<?php echo isset($_COOKIE['password']) ? $_COOKIE['password'] : ''; ?>">
                                                     <label class="form-label" for="floatingInput">Password</label>
                                                 </div>
                                                 <div class="d-flex justify-content-center form-check mb-4">
-                                                    <input type="checkbox" checked class="form-check-input me-2" id="form2Example33" value="">
+                                                    <input type="checkbox" class="form-check-input me-2" id="form2Example33" name="remember" <?php echo isset($_COOKIE['username']) ? 'checked' : ''; ?>>
                                                     <label class="form-check-label" for="form2Example33">Remember Me</label>
                                                 </div>
                                                 <button class="btn btn-primary btn-block mb-4 w-100" type="submit">Sign In</button>

@@ -1,5 +1,5 @@
 <?php
-require_once 'assets/php/functions/authentication.php';
+require_once 'assets/php/functions/auth/authentication.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="vanta-bg" lang="en">
@@ -33,7 +33,7 @@ require_once 'assets/php/functions/authentication.php';
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="teacher.php" style="color:#393939;"><i class="fas fa-chalkboard-teacher"></i> Teacher</a></li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="users.php" style="color:#393939;"><i class="fas fa-user"></i> User</a></li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="schedule.php" style="color:#393939;"><i class="fas fa-clock"></i>&nbsp;Schedule</a></li>
-                            </ul><a class="btn btn-light shadow" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" data-bs-original-title="Here you can logout your acccount." href="index.php">Logout</a>
+                            </ul><a class="btn btn-light shadow" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" data-bs-original-title="Here you can logout your acccount." href="assets/php/functions/auth/sign-out.php">Logout</a>
                         </div>
                     </div>
                 </nav>
