@@ -91,6 +91,8 @@ function submitForm(formId, api, columns) {
             url: url,
             data: form.serialize(),
             success: function(data) {
+                console.log(form.serialize());
+                console.log(data);
                 var result = JSON.parse(data);
                 showSweetAlert("Success!", result.message, result.status, 2000);
                 clearForm(form);

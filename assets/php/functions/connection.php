@@ -87,7 +87,13 @@
             `subject_id` INT NOT NULL,
             `room_id` INT NOT NULL,
             `teacher_id` INT NOT NULL,
-            `day` VARCHAR(255) NOT NULL,
+            `monday` BOOLEAN NOT NULL DEFAULT 0,
+            `tuesday` BOOLEAN NOT NULL DEFAULT 0,
+            `wednesday` BOOLEAN NOT NULL DEFAULT 0,
+            `thursday` BOOLEAN NOT NULL DEFAULT 0,
+            `friday` BOOLEAN NOT NULL DEFAULT 0,
+            `saturday` BOOLEAN NOT NULL DEFAULT 0,
+            `sunday` BOOLEAN NOT NULL DEFAULT 0,
             `time_start` VARCHAR(255) NOT NULL,
             `time_end` VARCHAR(255) NOT NULL,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -98,6 +104,10 @@
             FOREIGN KEY (`room_id`) REFERENCES `room`(`id`) ON DELETE CASCADE,
             FOREIGN KEY (`teacher_id`) REFERENCES `teacher`(`id`) ON DELETE CASCADE
         )
+        ");
+
+        $db->exec("
+            INSERT IGNORE INTO `users` (`id`,`name`, `username`, `password`, `role`) VALUES (1, 'Administrator', 'admin', 'admin', 'admin')
         ");
         
         $db->beginTransaction();
