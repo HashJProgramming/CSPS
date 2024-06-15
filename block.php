@@ -68,25 +68,13 @@ require_once 'assets/php/functions/auth/authentication.php';
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table table-hover table-bordered my-0" id="dataTable">
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>NAME</th>
-                                            <th>DESCRIPTION</th>
-                                            <th>CREATED</th>
-                                            <th class="text-center">OPTION</th>
-                                        </tr>
+                                        
                                     </thead>
                                     <tbody>
                                        
                                     </tbody>
                                     <tfoot>
-                                        <tr>
-                                            <td><strong>ID</strong></td>
-                                            <td><strong>NAME</strong></td>
-                                            <td><strong>DESCRIPTION</strong></td>
-                                            <td><strong>CRATED</strong></td>
-                                            <td class="text-center"><strong>OPTION</strong></td>
-                                        </tr>
+                                        
                                     </tfoot>
                                 </table>
                             </div>

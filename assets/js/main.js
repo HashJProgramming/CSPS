@@ -77,8 +77,7 @@ function initializeDataTable(api, columns) {
 }
 
 function clearForm(form) {
-    $(form).find('input').val('');
-    $(form).find('textarea').val('');
+    $(form).find('input, textarea, select').val('');
 }
 
 function submitForm(formId, api, columns) {
