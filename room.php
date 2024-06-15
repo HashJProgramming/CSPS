@@ -1,3 +1,6 @@
+<?php
+require_once 'assets/php/functions/authentication.php';
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="vanta-bg" lang="en">
 

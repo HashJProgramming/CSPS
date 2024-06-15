@@ -1,6 +1,6 @@
 <?php
 
-require_once './connection.php';
+require_once '../connection.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
