@@ -96,26 +96,7 @@ require_once 'assets/php/functions/auth/authentication.php';
             </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="update">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Update Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
-                        <p>Here you can update course info.</p>
-                    </div>
-                    <form action="assets/php/functions/block/update.php" id="add-form">
-                        <input type="hidden" name="id">
-                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
-                        <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">COURSE DESCRIPTION</label></div>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
-                </form>
-            </div>
-        </div>
-    </div>
+
     <div class="modal fade" role="dialog" tabindex="-1" id="add">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -136,17 +117,37 @@ require_once 'assets/php/functions/auth/authentication.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="update">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Block</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                        <p>Here you can update Block info.</p>
+                    </div>
+                    <form action="assets/php/functions/block/update.php" id="add-form">
+                        <input type="hidden" name="id">
+                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
+                        <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">BLOCK DESCRIPTION</label></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="remove">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Remove Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Remove Block</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form action="assets/php/functions/block/delete.php" id="remove-form">
                         <input type="hidden" name="id">
                         <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
-                        <p>Are you sure want to remove this course?</p>
+                        <p>Are you sure want to remove this Block?</p>
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="submit" data-bs-dismiss="modal">Yes</button></div>

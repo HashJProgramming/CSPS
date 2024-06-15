@@ -15,7 +15,8 @@ require_once 'assets/php/functions/auth/authentication.php';
     <link rel="stylesheet" href="assets/css/Articles-Cards-images.css">
     <link rel="stylesheet" href="assets/css/Change-Password-floating-Label.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
-</head>
+    <link rel="stylesheet" href="assets/css/datatables.min.css">
+    </head>
 
 <body id="page-top">
     <div id="wrapper">
@@ -88,19 +89,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                            <td>33</td>
-                                            <td>$162,700</td>
-                                            <td class="text-center">
-                                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Action</button>
-                                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" data-bs-target="#update" data-bs-toggle="modal">Update</a><a class="dropdown-item" href="#" data-bs-target="#remove" data-bs-toggle="modal">Delete</a></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr></tr>
-                                        <tr></tr>
-                                        <tr></tr>
+                                        
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -134,6 +123,27 @@ require_once 'assets/php/functions/auth/authentication.php';
             </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                        <p>Here you can update Course info.</p>
+                    </div>
+                    <form action="assets/php/functions/course/add.php" id="update-form">
+                        <input type="hidden" name="id">
+                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">BLOCK&nbsp;NAME</label></div>
+                        <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">COURSE&nbsp;DESCRIPTION</label></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="update">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -144,31 +154,13 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Here you can update course info.</p>
                     </div>
-                    <form>
-                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder="name@example.com" name="fullname"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
+                    <form action="assets/php/functions/course/update.php" id="add-form">
+                        <input type="hidden" name="id">
+                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
                         <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">COURSE DESCRIPTION</label></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="add">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Create Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
-                        <p>Here you can update course info.</p>
                     </div>
-                    <form>
-                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder="name@example.com" name="fullname"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
-                        <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">COURSE DESCRIPTION</label></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -179,11 +171,14 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <h4 class="modal-title">Remove Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                    <form action="assets/php/functions/course/delete.php" id="remove-form">
+                        <input type="hidden" name="id">
+                        <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Are you sure want to remove this course?</p>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="button">Yes</button></div>
+                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="submit" data-bs-dismiss="modal">Yes</button></div>
+            </form>
             </div>
         </div>
     </div>
@@ -195,6 +190,9 @@ require_once 'assets/php/functions/auth/authentication.php';
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/vanta-background.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/datatables.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/functions/course-main.js"></script>
 </body>
 
 </html>
