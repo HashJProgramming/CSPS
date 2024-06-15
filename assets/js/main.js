@@ -12,24 +12,18 @@ function showSweetAlert(title, text, icon, timer) {
     });
 }
 
-function initializeDataTable(api, data, processing, serverSide, dom, id) {
+function initializeDataTable(api, columns) {
 
-    var parsedData = JSON.parse(data); 
-
-    if ($.fn.DataTable.isDataTable(id)) {
-        $(id).DataTable().destroy();
+    if ($.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').DataTable().destroy();
     }
 
-    new DataTable(id, {
+    new DataTable('#dataTable', {
         ajax: api,
-        data: parsedData.data,
-        processing: processing,
-        serverSide: serverSide,
-        dom: dom,
-        columns: [
-            { title: "ID", data: 0 },
-            { title: "First Name", data: 1 },
-        ],
+        processing: true,
+        serverSide: true,
+        dom: '<"top"Brtip<"clear">',
+        columns: columns,
         buttons: [
             {
                 extend: "excel",
@@ -82,15 +76,12 @@ function initializeDataTable(api, data, processing, serverSide, dom, id) {
     });
 }
 
-function clearForm(id) {
-    const form = document.getElementById(id);
-    const inputs = form.getElementsByTagName('input');
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = '';
-    }
+function clearForm(form) {
+    $(form).find('input').val('');
+    $(form).find('textarea').val('');
 }
 
-function submitForm(formId) {
+function submitForm(formId, api, columns) {
     $(formId).submit(function(e) {
         e.preventDefault();
         var form = $(this);
@@ -102,19 +93,20 @@ function submitForm(formId) {
             success: function(data) {
                 var result = JSON.parse(data);
                 showSweetAlert("Success!", result.message, result.status, 2000);
-                clearForm(formId);
+                clearForm(form);
+                initializeDataTable(api, columns);
             },
             error: function(data) {
                 var result = JSON.parse(data);
                 showSweetAlert("Error!", result.message, result.status, 2000);
-                clearForm(formId);
+                clearForm(form);
             }
         });
     });
 }
 
 function submitLoginForm(formId) {
-    $("#"+formId).submit(function(e) {
+    $(formId).submit(function(e) {
         e.preventDefault();
         var form = $(this);
         var url = 'assets/php/functions/auth/sign-in.php';
@@ -125,7 +117,7 @@ function submitLoginForm(formId) {
             success: function(data) {
                 var result = JSON.parse(data);
                 showSweetAlert(result.status.toUpperCase(), result.message, result.status, 500);
-                clearForm(formId);
+                clearForm(form);
                 if (result.status == 'success') {
                     setTimeout(function() {
                         window.location.href = 'dashboard.php';
@@ -135,11 +127,9 @@ function submitLoginForm(formId) {
             error: function(data) {
                 var result = JSON.parse(data);
                 showSweetAlert(result.status.toUpperCase(), result.message, result.status, 2000);
-                clearForm(formId);
+                clearForm(form);
             }
         });
     });
 }
-
-
 

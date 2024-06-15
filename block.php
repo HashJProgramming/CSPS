@@ -15,6 +15,7 @@ require_once 'assets/php/functions/auth/authentication.php';
     <link rel="stylesheet" href="assets/css/Articles-Cards-images.css">
     <link rel="stylesheet" href="assets/css/Change-Password-floating-Label.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
+    <link rel="stylesheet" href="assets/css/datatables.min.css">
 </head>
 
 <body id="page-top">
@@ -64,23 +65,11 @@ require_once 'assets/php/functions/auth/authentication.php';
                             <p class="text-primary m-0 fw-bold">Users Lists</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
-                                                <option value="10" selected="">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>&nbsp;</label></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                                </div>
-                            </div>
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table table-hover table-bordered my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>NAME</th>
                                             <th>DESCRIPTION</th>
                                             <th>CREATED</th>
@@ -88,22 +77,11 @@ require_once 'assets/php/functions/auth/authentication.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                            <td>33</td>
-                                            <td>$162,700</td>
-                                            <td class="text-center">
-                                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Action</button>
-                                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" data-bs-target="#update" data-bs-toggle="modal">Update</a><a class="dropdown-item" href="#" data-bs-target="#remove" data-bs-toggle="modal">Delete</a></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr></tr>
-                                        <tr></tr>
-                                        <tr></tr>
+                                       
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <td><strong>ID</strong></td>
                                             <td><strong>NAME</strong></td>
                                             <td><strong>DESCRIPTION</strong></td>
                                             <td><strong>CRATED</strong></td>
@@ -111,22 +89,6 @@ require_once 'assets/php/functions/auth/authentication.php';
                                         </tr>
                                     </tfoot>
                                 </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,12 +106,13 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Here you can update course info.</p>
                     </div>
-                    <form>
-                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder="name@example.com" name="fullname"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
+                    <form action="assets/php/functions/block/update.php" id="add-form">
+                        <input type="hidden" name="id">
+                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">COURSE NAME</label></div>
                         <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">COURSE DESCRIPTION</label></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -163,12 +126,13 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Here you can update block info.</p>
                     </div>
-                    <form>
-                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder="name@example.com" name="fullname"><label class="form-label" for="floatingInput">BLOCK&nbsp;NAME</label></div>
+                    <form action="assets/php/functions/block/add.php" id="update-form">
+                        <input type="hidden" name="id">
+                        <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder=" " name="name"><label class="form-label" for="floatingInput">BLOCK&nbsp;NAME</label></div>
                         <div class="form-floating mb-3"><textarea class="form-control" name="description"></textarea><label class="form-label" for="floatingInput">BLOCK&nbsp;DESCRIPTION</label></div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -179,11 +143,14 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <h4 class="modal-title">Remove Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                    <form action="assets/php/functions/block/delete.php" id="remove-form">
+                        <input type="hidden" name="id">
+                        <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Are you sure want to remove this course?</p>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="button">Yes</button></div>
+                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="submit" data-bs-dismiss="modal">Yes</button></div>
+            </form>
             </div>
         </div>
     </div>
@@ -195,6 +162,9 @@ require_once 'assets/php/functions/auth/authentication.php';
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/vanta-background.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/datatables.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/functions/block-main.js"></script>
 </body>
 
 </html>

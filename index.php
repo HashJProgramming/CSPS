@@ -112,7 +112,7 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
     <script src="assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
-            submitLoginForm('sign-in-form');
+            submitLoginForm('#sign-in-form');
         });
     </script>
 </body>
