@@ -1,3 +1,6 @@
+<?php
+require_once 'assets/php/functions/authentication.php';
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="vanta-bg" lang="en">
 
@@ -22,15 +25,15 @@
                     <div class="container-fluid"><img class="mx-2" src="assets/img/icon.png" width="60em"><a class="navbar-brand d-flex align-items-center" href="/"><span class="d-none d-md-block"><strong>Class Schedule Plotting System</strong></span><span class="d-block d-md-none"><strong>CSPS</strong></span></a><button data-bs-toggle="collapse" data-bs-target="#navcol-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="navbar-nav mx-auto">
-                                <li class="nav-item"><a class="nav-link link-primary" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Dashboard." href="dashboard.html" style="color:#393939;"><i class="fas fa-home"></i> Home</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="block.html" style="color:#393939;"><i class="fas fa-th-list"></i> Block</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="course.html" style="color:#393939;"><i class="fas fa-book"></i>&nbsp;Course</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="subjects.html" style="color:#393939;"><i class="fas fa-book"></i>&nbsp;Subject</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="room.html" style="color:#393939;"><i class="fas fa-chalkboard"></i>&nbsp;Room</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="teacher.html" style="color:#393939;"><i class="fas fa-chalkboard-teacher"></i> Teacher</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="users.html" style="color:#393939;"><i class="fas fa-user"></i> User</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="schedule.html" style="color:#393939;"><i class="fas fa-clock"></i>&nbsp;Schedule</a></li>
-                            </ul><a class="btn btn-light shadow" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" data-bs-original-title="Here you can logout your acccount." href="index.html">Logout</a>
+                                <li class="nav-item"><a class="nav-link link-primary" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Dashboard." href="dashboard.php" style="color:#393939;"><i class="fas fa-home"></i> Home</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="block.php" style="color:#393939;"><i class="fas fa-th-list"></i> Block</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="course.php" style="color:#393939;"><i class="fas fa-book"></i>&nbsp;Course</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="subjects.php" style="color:#393939;"><i class="fas fa-book"></i>&nbsp;Subject</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="room.php" style="color:#393939;"><i class="fas fa-chalkboard"></i>&nbsp;Room</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="teacher.php" style="color:#393939;"><i class="fas fa-chalkboard-teacher"></i> Teacher</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="users.php" style="color:#393939;"><i class="fas fa-user"></i> User</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" data-bs-original-title="Here you can see your Sales &amp; Transactions." href="schedule.php" style="color:#393939;"><i class="fas fa-clock"></i>&nbsp;Schedule</a></li>
+                            </ul><a class="btn btn-light shadow" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" data-bs-original-title="Here you can logout your acccount." href="index.php">Logout</a>
                         </div>
                     </div>
                 </nav>

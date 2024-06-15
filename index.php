@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_SESSION['authenticated']) || $_SESSION['authenticated']) {
+    header('Location: dashboard.php');
+}
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
@@ -41,11 +49,22 @@
                                                     <p class="w-lg-50"><span style="color: rgb(78, 115, 223);">V. Sagun cor. M. Roxas St. San Francisco Dist. Pagadian City</span><br><span style="color: rgb(78, 115, 223);">Call No. :&nbsp;</span><strong><span style="color: rgb(78, 115, 223);">0920-798-3228(</span></strong><span style="color: rgb(78, 115, 223);">Smart)/</span><strong><span style="color: rgb(78, 115, 223);">0977-804-7489</span></strong><span style="color: rgb(78, 115, 223);">(Globe)</span></p>
                                                 </div>
                                             </div>
-                                            <form>
-                                                <div class="form-floating mb-3"><input class="form-control form-control" type="text" placeholder="name@example.com" name="username"><label class="form-label" for="floatingInput">Username</label></div>
-                                                <div class="form-floating mb-3"><input class="form-control form-control" type="password" placeholder="name@example.com" name="password"><label class="form-label" for="floatingInput">Password</label></div>
-                                                <div class="d-flex justify-content-center form-check mb-4"><input type="checkbox" checked="" class="form-check-input me-2" id="form2Example33" value=""><label class="form-check-label" for="form2Example33"> Remember Me</label></div><a class="btn btn-primary btn-block mb-4 w-100" role="button" data-mdb-button-init="" data-mdb-ripple-init="" href="dashboard.html"> Sign In</a>
+                                            <form id="sign-in-form">
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" type="text" placeholder="username" name="username">
+                                                    <label class="form-label" for="floatingInput">Username</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" type="password" placeholder="password" name="password">
+                                                    <label class="form-label" for="floatingInput">Password</label>
+                                                </div>
+                                                <div class="d-flex justify-content-center form-check mb-4">
+                                                    <input type="checkbox" checked class="form-check-input me-2" id="form2Example33" value="">
+                                                    <label class="form-check-label" for="form2Example33">Remember Me</label>
+                                                </div>
+                                                <button class="btn btn-primary btn-block mb-4 w-100" type="submit">Sign In</button>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -90,6 +109,12 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            submitLoginForm('sign-in-form');
+        });
+    </script>
 </body>
 
 </html>

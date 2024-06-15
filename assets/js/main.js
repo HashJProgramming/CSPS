@@ -89,3 +89,57 @@ function clearForm(id) {
         inputs[i].value = '';
     }
 }
+
+function submitForm(formId) {
+    $(formId).submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(),
+            success: function(data) {
+                var result = JSON.parse(data);
+                showSweetAlert("Success!", result.message, result.status, 2000);
+                clearForm(formId);
+            },
+            error: function(data) {
+                var result = JSON.parse(data);
+                showSweetAlert("Error!", result.message, result.status, 2000);
+                clearForm(formId);
+            }
+        });
+    });
+}
+
+function submitLoginForm(formId) {
+    $("#"+formId).submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = 'assets/php/functions/sign-in.php';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(),
+            success: function(data) {
+                var result = JSON.parse(data);
+                showSweetAlert(result.status.toUpperCase(), result.message, result.status, 2000);
+                clearForm(formId);
+                if (result.status == 'success') {
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.php';
+                    }, 2000);
+                }
+            },
+            error: function(data) {
+                var result = JSON.parse(data);
+                showSweetAlert(result.status.toUpperCase(), result.message, result.status, 2000);
+                clearForm(formId);
+            }
+        });
+    });
+}
+
+
+
