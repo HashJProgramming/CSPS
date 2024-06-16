@@ -1,5 +1,49 @@
 <?php
 require_once 'assets/php/functions/auth/authentication.php';
+require 'assets/php/functions/connection.php';
+
+$block = isset($_POST['block']) ? $_POST['block'] : '';
+$course = isset($_POST['course']) ? $_POST['course'] : '';
+
+function getSchedule() {
+    global $block, $course, $db;
+    $sql = "SELECT * FROM `schedule_view` WHERE block_id = :block AND course_id = :course";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':block', $block);
+    $stmt->bindParam(':course', $course);
+    $stmt->execute();
+    $result = $stmt->fetchAll(); 
+    if ($stmt->rowCount() > 0) {
+        foreach($result as $row){
+            ?>
+                <tr>
+                    <td class="text-center"><?=$row['days']?></td>
+                    <td class="text-center"><?=date('h:i A', strtotime($row['time_start']))?> - <?=date('h:i A', strtotime($row['time_end']))?></td>
+                    <td class="text-center"><?=$row['subject_name']?></td>
+                    <td class="text-center"><?=$row['teacher_name']?></td>
+                    <td class="text-center">ROOM <?=$row['room_name']?></td>
+                </tr>
+            <?php
+        }
+    } else {
+        ?>
+            <tr>
+                <td colspan="5" class="text-center">No schedule found for the selected parameters.</td>
+            </tr>
+        <?php
+    }
+}
+
+$sql = "SELECT block.name AS block_name, course.name AS course_name
+        FROM block
+        JOIN course ON block.id = :block_id AND course.id = :course_id;";
+$stmt = $db->prepare($sql);
+$stmt->bindParam(':block_id', $block);
+$stmt->bindParam(':course_id', $course);
+$stmt->execute();
+$result = $stmt->fetch();
+$block_name = $result['block_name'];
+$course_name = $result['course_name'];
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -16,7 +60,7 @@ require_once 'assets/php/functions/auth/authentication.php';
     <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
 </head>
 
-<body>
+<body onload="printPageAndRedirect()">
     <div class="container-fluid py-3 py-xl-3">
         <div class="row">
             <div class="col-md-8 col-xl-7 text-center text-primary mx-auto"><img src="assets/img/icon.jpg" width="100em">
@@ -33,126 +77,24 @@ require_once 'assets/php/functions/auth/authentication.php';
                 <th colspan="6" class="bg-danger text-light text-center">SECOND SEMESTER SY. 2023 - 2024</th>
             </tr>
             <tr>
-                <th colspan="6" class="text-center"><h3>CHS - 3C &amp; WAFT - 3B</h3></th>
+                <th colspan="6" class="text-center"><h3><?= $block_name?> - <?= $course_name?></h3></th>
             </tr>
             <tr>
-                <th colspan="6" class="bg-primary text-light">TEACHER :  </th>
+                <th colspan="6" class="bg-primary text-light"></th>
             </tr>
             <tr>
-                <th>Column 1</th>
-                <th>Column 1</th>
-                <th>Column 1</th>
-                <th>Column 1</th>
-                <th>Column 1</th>
-                <th>Column 2</th>
+                <th class="text-center">DAY</th>
+                <th class="text-center">TIME</th>
+                <th class="text-center">SUBJECT</th>
+                <th class="text-center">TEACHER</th>
+                <th class="text-center">ROOM NO.</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-            </tr>
-            
+            <!-- HERE -->
+             <?php
+             getSchedule();
+             ?>
         </tbody>
     </table></div>
     </div>
@@ -176,6 +118,14 @@ require_once 'assets/php/functions/auth/authentication.php';
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/vanta-background.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        function printPageAndRedirect() {
+            window.print();
+            setTimeout(function() {
+                window.location.href = 'schedule.php';
+            }, 1000); // Redirect after 1 second (adjust as needed)
+        }
+    </script>
 </body>
 
 </html>

@@ -14,6 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($response);
         exit;
     }
+
+    if (strtotime($start_time) < strtotime('7:00 AM')) {
+        $response = array('status' => 'error', 'message' => 'Start time must be equal or greater than 7:00 AM!');
+        echo json_encode($response);
+        exit;
+    }
+    
+    // Check if end time is greater than 8:30 PM
+    if (strtotime($end_time) > strtotime('8:30 PM')) {
+        $response = array('status' => 'error', 'message' => 'End time must not be greater than 8:30 PM!');
+        echo json_encode($response);
+        exit;
+    }
+
     
     $teacher_id = $_POST['teacher'];
     $block_id = $_POST['block'];

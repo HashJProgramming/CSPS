@@ -61,4 +61,6 @@ $(document).ready(function () {
     $('#remove input[name="id"]').val(id);
     console.log(id);
   });
+
+
 });

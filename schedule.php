@@ -293,32 +293,28 @@ include_once 'assets/php/functions/data/get-data.php';
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Here you can manually print schedule report.</p>
                     </div>
-                    <form>
+                    <form action="print-schedule.php" method="POST">
                         <div class="container">
                             <div class="row row-cols-2">
                                 <div class="col">
-                                    <div class="form-floating mb-3"><select class="form-select">
+                                    <div class="form-floating mb-3"><select class="form-select" name="block">
                                             <optgroup label="This is a group">
-                                                <option value="12" selected="">This is item 1</option>
-                                                <option value="13">This is item 2</option>
-                                                <option value="14">This is item 3</option>
+                                                <?= block(); ?>
                                             </optgroup>
                                         </select><label class="form-label" for="floatingInput">BLOCK</label></div>
                                 </div>
                                 <div class="col">
-                                    <div class="form-floating mb-3"><select class="form-select">
+                                    <div class="form-floating mb-3"><select class="form-select" name="course">
                                             <optgroup label="This is a group">
-                                                <option value="12" selected="">This is item 1</option>
-                                                <option value="13">This is item 2</option>
-                                                <option value="14">This is item 3</option>
+                                                <?= course(); ?>
                                             </optgroup>
                                         </select><label class="form-label" for="floatingInput">COURSE</label></div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
