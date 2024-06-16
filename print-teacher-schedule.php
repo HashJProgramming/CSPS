@@ -2,17 +2,13 @@
 require_once 'assets/php/functions/auth/authentication.php';
 require 'assets/php/functions/connection.php';
 
-$block = isset($_POST['block']) ? $_POST['block'] : '';
-$course = isset($_POST['course']) ? $_POST['course'] : '';
-$year = isset($_POST['year']) ? $_POST['year'] : '';
-$semester = isset($_POST['semester']) ? $_POST['semester'] : '';
+$teacher = isset($_POST['teacher']) ? $_POST['teacher'] : '';
 
 function getSchedule() {
-    global $block, $course, $db;
-    $sql = "SELECT * FROM `schedule_view` WHERE block_id = :block AND course_id = :course";
+    global $teacher, $course, $db, $teacher_name;
+    $sql = "SELECT * FROM `schedule_view` WHERE teacher_id = :teacher";
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(':block', $block);
-    $stmt->bindParam(':course', $course);
+    $stmt->bindParam(':teacher', $teacher);
     $stmt->execute();
     $result = $stmt->fetchAll(); 
     if ($stmt->rowCount() > 0) {
@@ -22,7 +18,7 @@ function getSchedule() {
                     <td class="text-center"><?=$row['days']?></td>
                     <td class="text-center"><?=date('h:i A', strtotime($row['time_start']))?> - <?=date('h:i A', strtotime($row['time_end']))?></td>
                     <td class="text-center"><?=$row['subject_name']?></td>
-                    <td class="text-center"><?=$row['firstname']?></td>
+                    <td class="text-center"><?=$teacher_name?></td>
                     <td class="text-center">ROOM <?=$row['room_name']?></td>
                 </tr>
             <?php
@@ -36,16 +32,12 @@ function getSchedule() {
     }
 }
 
-$sql = "SELECT block.name AS block_name, course.name AS course_name
-        FROM block
-        JOIN course ON block.id = :block_id AND course.id = :course_id;";
+$sql = "SELECT CONCAT(firstname, ' ', middlename, ' ', lastname) AS teacher_name FROM teacher WHERE id = :teacher_id;";
 $stmt = $db->prepare($sql);
-$stmt->bindParam(':block_id', $block);
-$stmt->bindParam(':course_id', $course);
+$stmt->bindParam(':teacher_id', $teacher);
 $stmt->execute();
 $result = $stmt->fetch();
-$block_name = $result['block_name'];
-$course_name = $result['course_name'];
+$teacher_name = $result['teacher_name'];
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -76,13 +68,13 @@ $course_name = $result['course_name'];
                 <th colspan="6" class="bg-warning text-light text-center">STUDENT LOAD (COLLEGE DEPARTMENT)</th>
             </tr>
             <tr>
-                <th colspan="6" class="bg-danger text-light text-center"><?=$semester?> SY. <?=$year?></th>
+                <th colspan="6" class="bg-danger text-light text-center">CSPS - Computer Schedule Plotting System</th>
             </tr>
             <tr>
-                <th colspan="6" class="text-center"><h3><?= $block_name?> - <?= $course_name?></h3></th>
+                <th colspan="6" class="text-center"><h3></h3></th>
             </tr>
             <tr>
-                <th colspan="6" class="bg-primary text-light"></th>
+                <th colspan="6" class="bg-primary text-light">Teacher: <?= $teacher_name?></th>
             </tr>
             <tr>
                 <th class="text-center">DAY</th>

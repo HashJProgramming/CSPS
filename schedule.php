@@ -45,7 +45,11 @@ include_once 'assets/php/functions/data/get-data.php';
                         <div class="row">
                             <div class="col">
                                 <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-cog fa-sm text-white-50"></i>&nbsp;Option</button>
-                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" data-bs-target="#add" data-bs-toggle="modal">Add Schedule</a><a class="dropdown-item" href="#" data-bs-target="#print" data-bs-toggle="modal">Print Schedule</a></div>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#" data-bs-target="#add" data-bs-toggle="modal">Add Schedule</a>
+                                        <a class="dropdown-item" href="#" data-bs-target="#print" data-bs-toggle="modal">Print Schedule</a>
+                                        <a class="dropdown-item" href="#" data-bs-target="#teacher-print" data-bs-toggle="modal">Print Teacher Schedule</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -326,7 +330,35 @@ include_once 'assets/php/functions/data/get-data.php';
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Print</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="teacher-print">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Print Schedule</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                        <p>Here you can manually print schedule report.</p>
+                    </div>
+                    <form action="print-teacher-schedule.php" method="POST">
+                        <div class="container">
+                            <div class="row row-cols-2">
+                                <div class="col col-md-12">
+                                <div class="form-floating mb-3"><select class="form-select" name="teacher">
+                                            <optgroup label="Selecte Teacher">
+                                                <?= teacher(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">TEACHER</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Print</button></div>
                 </form>
             </div>
         </div>
