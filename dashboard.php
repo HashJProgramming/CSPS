@@ -115,7 +115,7 @@ include_once 'assets/php/functions/data/get-data.php';
                     <h3 class="text-dark mb-4">Schedules</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Schedule Lists</p>
+                            <p class="text-primary m-0 fw-bold">Today Schedule List</p>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
@@ -147,7 +147,7 @@ include_once 'assets/php/functions/data/get-data.php';
     <script src="assets/js/sweetalert.min.js"></script>
     <script src="assets/js/datatables.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/functions/schedule-main.js"></script>
+    <script src="assets/js/functions/dashboard-main.js"></script>
 </body>
 
 </html>

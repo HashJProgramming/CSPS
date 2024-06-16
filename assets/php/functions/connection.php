@@ -232,6 +232,52 @@
                     teacher t ON s.teacher_id = t.id;
         ");
 
+        $db->exec("
+            CREATE VIEW IF NOT EXISTS today_schedule_view AS
+                SELECT 
+                    s.id,
+                    b.name AS block_name,
+                    c.name AS course_name,
+                    sub.name AS subject_name,
+                    r.name AS room_name,
+                    CONCAT(t.firstname, ' ', t.lastname) AS teacher_name,
+                    CONCAT(
+                        IF(s.monday = 1, 'M', ''),
+                        IF(s.tuesday = 1, 'T', ''),
+                        IF(s.wednesday = 1, 'W', ''),
+                        IF(s.thursday = 1, 'Th', ''),
+                        IF(s.friday = 1, 'F', ''),
+                        IF(s.saturday = 1, 'Sa', ''),
+                        IF(s.sunday = 1, 'Su', '')
+                    ) AS days,
+                    s.time_start AS time_start,
+                    s.time_end AS time_end,
+                    s.created_at
+                FROM
+                    schedule s
+                JOIN
+                    block b ON s.block_id = b.id
+                JOIN
+                    course c ON s.course_id = c.id
+                JOIN
+                    subject sub ON s.subject_id = sub.id
+                JOIN
+                    room r ON s.room_id = r.id
+                JOIN
+                    teacher t ON s.teacher_id = t.id
+                WHERE
+                    CASE
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 1 THEN s.sunday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 2 THEN s.monday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 3 THEN s.tuesday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 4 THEN s.wednesday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 5 THEN s.thursday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 6 THEN s.friday
+                        WHEN DAYOFWEEK(CURRENT_DATE()) = 7 THEN s.saturday
+                    END = 1;
+
+        ");
+
         
 
         $db->exec('
