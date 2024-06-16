@@ -191,6 +191,17 @@ function count_room() {
     return $count;
 }
 
+function count_schedule() {
+    global $db;
+    $sql = 'SELECT * FROM `schedule`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
 function count_users() {
     global $db;
     $sql = 'SELECT * FROM `users`';
