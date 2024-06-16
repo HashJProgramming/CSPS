@@ -16,6 +16,7 @@ include_once 'assets/php/functions/data/get-data.php';
     <link rel="stylesheet" href="assets/css/Articles-Cards-images.css">
     <link rel="stylesheet" href="assets/css/Change-Password-floating-Label.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
+    <link rel="stylesheet" href="assets/css/datatables.min.css">
 </head>
 
 <body id="page-top">
@@ -144,6 +145,9 @@ include_once 'assets/php/functions/data/get-data.php';
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/vanta-background.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/datatables.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/functions/schedule-main.js"></script>
 </body>
 
 </html>
