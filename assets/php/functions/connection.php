@@ -187,9 +187,9 @@
 
         
 
-        $db->exec("
-            INSERT IGNORE INTO `users` (`id`,`name`, `username`, `password`, `role`) VALUES (1, 'Administrator', 'admin', 'admin', 'admin')
-        ");
+        $db->exec('
+            INSERT IGNORE INTO `users` (`id`,`name`, `username`, `password`, `role`) VALUES (1, "Administrator", "admin", "$2y$10$WgL2d2fzi6IiGiTfXvdBluTLlMroU8zBtIcRut7SzOB6j9i/LbA4K", "admin")
+        ');
         
         $db->beginTransaction();
         $db->commit();

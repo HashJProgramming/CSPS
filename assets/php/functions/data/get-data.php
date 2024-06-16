@@ -51,7 +51,6 @@ function municipality (){
     }
 }
 
-
 function barangay (){
     global $db;
     $sql = 'SELECT * FROM `barangay` WHERE `brgyCode` = 097322014';
@@ -65,6 +64,78 @@ function barangay (){
             <option value="<?=$row['brgyCode']?>" <?=$selected?>><?=$row['brgyDesc']?></option>
             <?php
         
+    }
+}
+
+function teacher (){
+    global $db;
+    $sql = 'SELECT * FROM `teacher`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+            ?>
+            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <?php
+    }
+}
+
+function block (){
+    global $db;
+    $sql = 'SELECT * FROM `block`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+            ?>
+            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <?php
+    }
+}
+
+
+function course (){
+    global $db;
+    $sql = 'SELECT * FROM `course`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+            ?>
+            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <?php
+    }
+}
+
+
+function subject (){
+    global $db;
+    $sql = 'SELECT * FROM `subject`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+            ?>
+            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <?php
+    }
+}
+
+function room (){
+    global $db;
+    $sql = 'SELECT * FROM `room`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+
+    foreach ($results as $row) {
+            ?>
+            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <?php
     }
 }
 

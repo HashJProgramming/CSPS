@@ -6,26 +6,38 @@ require_once '../connection.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $name = $_POST['name'];
-    $description = $_POST['description'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    
+    if ($password !== $confirm_password) {
+        $response = array('status' => 'error', 'message' => 'Password does not match!');
+        echo json_encode($response);
+        exit();
+    }
 
-    $sql_check = "SELECT * FROM `block` WHERE name = :name";
+    $sql_check = "SELECT * FROM `users` WHERE username = :username";
     $stmt_check = $db->prepare($sql_check);
-    $stmt_check->bindParam(':name', $name);
+    $stmt_check->bindParam(':username', $username);
     $stmt_check->execute();
 
     if ($stmt_check->rowCount() > 0) {
-        $response = array('status' => 'error', 'message' => 'Block already exists!');
+        $response = array('status' => 'error', 'message' => 'user already exists!');
     } else {
-        $sql = "INSERT INTO `block` (`name`, `description`) 
-                VALUES (:name, :description)";
-                
+        
+        $sql = "INSERT INTO `users` (`name`, `username`, `password`) 
+                VALUES (:name, :username, :password)";
+
+        $password = password_hash($password, PASSWORD_DEFAULT);        
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+
         if ($stmt->execute()) {
-            $response = array('status' => 'success', 'message' => 'Block added successfully!');
+            $response = array('status' => 'success', 'message' => 'user added successfully!');
         } else {
-            $response = array('status' => 'error', 'message' => 'Failed to add block!');
+            $response = array('status' => 'error', 'message' => 'Failed to add user!');
         }
     }
 } else {

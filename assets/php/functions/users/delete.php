@@ -7,22 +7,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $id = $_POST['id'];
 
-    $sql_check = "SELECT * FROM `block` WHERE `id` = :id";
+    $sql_check = "SELECT * FROM `users` WHERE `id` = :id";
     $stmt_check = $db->prepare($sql_check);
     $stmt_check->bindParam(':id', $id);
     $stmt_check->execute();
 
     if ($stmt_check->rowCount() > 0) {
-        $sql = "DELETE FROM `block` WHERE `id` = :id";
+        $sql = "DELETE FROM `users` WHERE `id` = :id";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':id', $id);
         if ($stmt->execute()) {
-            $response = array('status' => 'success', 'message' => 'Block deleted successfully!');
+            $response = array('status' => 'success', 'message' => 'user deleted successfully!');
         } else {
-            $response = array('status' => 'error', 'message' => 'Failed to delete block!');
+            $response = array('status' => 'error', 'message' => 'Failed to delete user!');
         }
     } else {
-        $response = array('status' => 'error', 'message' => 'Block does not exist!');
+        $response = array('status' => 'error', 'message' => 'user does not exist!');
     }
 } else {
     $response = array('status' => 'error', 'message' => 'Invalid request method!');

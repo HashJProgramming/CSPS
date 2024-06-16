@@ -62,7 +62,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                     <h3 class="text-dark mb-4">Room Management</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Room Lists</p>
+                            <p class="text-primary m-0 fw-bold">Room List</p>
                         </div>
                         <div class="card-body">
 
