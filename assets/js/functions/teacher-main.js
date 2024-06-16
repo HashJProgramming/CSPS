@@ -1,8 +1,8 @@
 $(document).ready(function () {
     columns = [
-      { title: "ID", data: 1 },
-      { title: "First Name", data: 2 },
-      { title: "Last Name", data: 3 },
+      { title: "ID", data: 0 },
+      { title: "First Name", data: 1 },
+      { title: "Last Name", data: 2 },
       { title: "Middle Name", data: 3 },
       { title: "Suffix", data: 4 },
       { title: "Birthdate", data: 5 },

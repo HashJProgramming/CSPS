@@ -22,7 +22,7 @@ function initializeDataTable(api, columns) {
         ajax: api,
         processing: true,
         serverSide: true,
-        dom: '<"top"Brtip<"clear">',
+        dom: '<"top"Bfrtip<"clear">',
         columns: columns,
         buttons: [
             {

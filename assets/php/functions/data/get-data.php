@@ -76,7 +76,7 @@ function teacher (){
 
     foreach ($results as $row) {
             ?>
-            <option value="<?=$row['id']?>"><?=$row['name']?></option>
+            <option value="<?=$row['id']?>"><?=$row['firstname']?> <?=$row['middlename']?> <?=$row['lastname']?></option>
             <?php
     }
 }

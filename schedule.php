@@ -66,7 +66,7 @@ include_once 'assets/php/functions/data/get-data.php';
                     </div>
                 </div>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Course Management</h3>
+                    <h3 class="text-dark mb-4">Schedule Management</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold">Schedule Lists</p>
@@ -103,7 +103,7 @@ include_once 'assets/php/functions/data/get-data.php';
                 </div>
                 <div class="modal-body">
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
-                        <p>Here you can update course info.</p>
+                        <p>Here you can update schedule info.</p>
                     </div>
                     <form>
                         <div class="container">
