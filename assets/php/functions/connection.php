@@ -286,6 +286,10 @@
         $userExists = $stmt->fetchColumn();
         
         if (!$userExists && basename($_SERVER['PHP_SELF']) != 'create-account.php') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            session_destroy();
             header('Location: create-account.php');
             exit();
         }        
