@@ -279,12 +279,17 @@
         ");
 
         
-
-        $db->exec('
-            INSERT IGNORE INTO `users` (`id`,`name`, `username`, `password`, `role`) VALUES (1, "Administrator", "admin", "$2y$10$WgL2d2fzi6IiGiTfXvdBluTLlMroU8zBtIcRut7SzOB6j9i/LbA4K", "admin")
-        ');
-        
         $db->beginTransaction();
+
+        $stmt = $db->prepare("SELECT COUNT(*) FROM `users` WHERE `username` = 'admin'");
+        $stmt->execute();
+        $userExists = $stmt->fetchColumn();
+        
+        if (!$userExists && basename($_SERVER['PHP_SELF']) != 'create-account.php') {
+            header('Location: create-account.php');
+            exit();
+        }        
+
         $db->commit();
 
     } catch(PDOException $e) {

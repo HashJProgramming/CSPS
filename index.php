@@ -1,4 +1,5 @@
 <?php
+include_once 'assets/php/functions/connection.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

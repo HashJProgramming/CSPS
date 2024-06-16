@@ -55,15 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check for time conflict
     $sql_check = "SELECT * FROM `schedule` 
-                  WHERE (
-                      (:start_time < time_end AND :end_time > time_start)
-                      OR (:start_time < time_start AND :end_time > time_start)
-                      OR (:start_time = time_start AND :end_time = time_end)
-                  ) AND ($dayCondition)";
-                  
+        WHERE (
+            (:start_time < time_end AND :end_time > time_start)
+            OR (:start_time < time_start AND :end_time > time_start)
+            OR (:start_time = time_start AND :end_time = time_end)
+        ) AND `room_id` = :room_id AND ($dayCondition)";
+        
     $stmt_check = $db->prepare($sql_check);
     $stmt_check->bindParam(':start_time', $start_time);
     $stmt_check->bindParam(':end_time', $end_time);
+    $stmt_check->bindParam(':room_id', $room_id);
     $stmt_check->execute();
 
     if ($stmt_check->rowCount() > 0) {
