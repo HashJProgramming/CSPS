@@ -23,6 +23,54 @@
                 PRIMARY KEY (`id`)
             )
         ");
+        
+        $db->exec("
+        CREATE TABLE IF NOT EXISTS region (
+            id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            psgcCode VARCHAR(255) DEFAULT NULL,
+            regDesc TEXT,
+            regCode VARCHAR(255) UNIQUE NOT NULL
+        );
+        ");
+
+        $db->exec("
+            CREATE TABLE IF NOT EXISTS province (
+                id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                psgcCode VARCHAR(255) DEFAULT NULL,
+                provDesc TEXT,
+                regCode VARCHAR(255) NOT NULL,
+                provCode VARCHAR(255) UNIQUE NOT NULL,
+                FOREIGN KEY (regCode) REFERENCES region(regCode)
+            );
+        ");
+
+        $db->exec("
+            CREATE TABLE IF NOT EXISTS municipality (
+                id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                psgcCode VARCHAR(255) DEFAULT NULL,
+                citymunDesc TEXT,
+                regCode VARCHAR(255) NOT NULL,
+                provCode VARCHAR(255) NOT NULL,
+                citymunCode VARCHAR(255) UNIQUE NOT NULL,
+                FOREIGN KEY (regCode) REFERENCES region(regCode),
+                FOREIGN KEY (provCode) REFERENCES province(provCode)
+            );
+        ");
+
+        $db->exec("
+            CREATE TABLE IF NOT EXISTS barangay (
+                id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                brgyCode VARCHAR(255) UNIQUE NOT NULL,
+                brgyDesc TEXT,
+                regCode VARCHAR(255) NOT NULL,
+                provCode VARCHAR(255) NOT NULL,
+                citymunCode VARCHAR(255) NOT NULL,
+                FOREIGN KEY (regCode) REFERENCES region(regCode),
+                FOREIGN KEY (provCode) REFERENCES province(provCode),
+                FOREIGN KEY (citymunCode) REFERENCES municipality(citymunCode)
+            );
+        ");
+            
         $db->exec("
             CREATE TABLE IF NOT EXISTS `block` (
                 `id` INT NOT NULL AUTO_INCREMENT,
@@ -73,12 +121,18 @@
                 `region` VARCHAR(255) NOT NULL,
                 `province` VARCHAR(255) NOT NULL,
                 `municipality` VARCHAR(255) NOT NULL,
+                `barangay` VARCHAR(255) NOT NULL,
                 `address` VARCHAR(255) NOT NULL,
                 `phone` VARCHAR(255) NOT NULL,
                 `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id`)
+                PRIMARY KEY (`id`),
+                FOREIGN KEY (`region`) REFERENCES region(`regCode`),
+                FOREIGN KEY (`province`) REFERENCES province(`provCode`),
+                FOREIGN KEY (`municipality`) REFERENCES municipality(`citymunCode`),
+                FOREIGN KEY (`barangay`) REFERENCES barangay(`brgyCode`)
             )
         ");
+
         $db->exec("
         CREATE TABLE IF NOT EXISTS `schedule` (
             `id` INT NOT NULL AUTO_INCREMENT,
@@ -105,6 +159,33 @@
             FOREIGN KEY (`teacher_id`) REFERENCES `teacher`(`id`) ON DELETE CASCADE
         )
         ");
+
+        $db->exec("
+            CREATE VIEW IF NOT EXISTS teacher_view AS
+                SELECT 
+                    t.id,
+                    t.firstname,
+                    t.lastname,
+                    t.middlename,
+                    t.suffix,
+                    t.birthdate,
+                    t.sex,
+                    r.regDesc AS region,
+                    p.provDesc AS province,
+                    m.citymunDesc AS municipality,
+                    b.brgyDesc AS barangay,
+                    t.address,
+                    t.phone,
+                    t.created_at
+                FROM 
+                    teacher t
+                    JOIN region r ON t.region = r.regCode
+                    JOIN province p ON t.province = p.provCode
+                    JOIN municipality m ON t.municipality = m.citymunCode
+                    JOIN barangay b ON t.barangay = b.brgyCode;
+        ");
+
+        
 
         $db->exec("
             INSERT IGNORE INTO `users` (`id`,`name`, `username`, `password`, `role`) VALUES (1, 'Administrator', 'admin', 'admin', 'admin')
