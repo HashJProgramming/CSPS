@@ -1,5 +1,6 @@
 <?php
 require_once 'assets/php/functions/auth/authentication.php';
+include_once 'assets/php/functions/data/get-data.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="vanta-bg" lang="en">
@@ -48,7 +49,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                     <div class="row g-0 align-items-center">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TEACHERS</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?= count_teacher() ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i></div>
                                     </div>
@@ -61,7 +62,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                     <div class="row g-0 align-items-center">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>BLOCK</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?= count_block() ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-book fa-2x text-gray-300" style="font-size: 33px;"></i></div>
                                     </div>
@@ -74,7 +75,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                     <div class="row g-0 align-items-center">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>COURSE</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?= count_course() ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-book fa-2x text-gray-300" style="font-size: 33px;"></i></div>
                                     </div>
@@ -87,7 +88,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                     <div class="row g-0 align-items-center">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Subjects</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?= count_subject() ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-book fa-2x text-gray-300" style="font-size: 33px;"></i></div>
                                     </div>
@@ -100,7 +101,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                                     <div class="row g-0 align-items-center">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>rooms</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>0</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span><?= count_room() ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-book fa-2x text-gray-300" style="font-size: 33px;"></i></div>
                                     </div>
@@ -116,66 +117,18 @@ require_once 'assets/php/functions/auth/authentication.php';
                             <p class="text-primary m-0 fw-bold">Schedule Lists</p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 text-nowrap">
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
-                                                <option value="10" selected="">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>&nbsp;</label></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                                </div>
-                            </div>
                             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                                 <table class="table table-hover table-bordered my-0" id="dataTable">
                                     <thead>
-                                        <tr>
-                                            <th>TEACHER</th>
-                                            <th>SUBJECT</th>
-                                            <th>DAY</th>
-                                            <th>TIME</th>
-                                            <th>ROOM</th>
-                                        </tr>
+                                        
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                                            <td>PROGRAMMING 1</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
-                                        </tr>
-                                        <tr></tr>
+                                        
                                     </tbody>
                                     <tfoot>
-                                        <tr>
-                                            <td><strong>TEACHER</strong></td>
-                                            <td><strong>SUBJECT</strong></td>
-                                            <td><strong>DAY</strong></td>
-                                            <td><strong>TIME</strong></td>
-                                            <td><strong>ROOM</strong></td>
-                                        </tr>
+                                        
                                     </tfoot>
                                 </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>

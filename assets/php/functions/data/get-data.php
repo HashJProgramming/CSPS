@@ -34,7 +34,6 @@ function province (){
 }
 
 
-
 function municipality (){
     global $db;
     $sql = 'SELECT * FROM `municipality` WHERE `citymunCode` = 097322';
@@ -95,7 +94,6 @@ function block (){
     }
 }
 
-
 function course (){
     global $db;
     $sql = 'SELECT * FROM `course`';
@@ -109,7 +107,6 @@ function course (){
             <?php
     }
 }
-
 
 function subject (){
     global $db;
@@ -139,3 +136,68 @@ function room (){
     }
 }
 
+function count_teacher() {
+    global $db;
+    $sql = 'SELECT * FROM `teacher`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
+function count_block() {
+    global $db;
+    $sql = 'SELECT * FROM `block`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
+function count_course() {
+    global $db;
+    $sql = 'SELECT * FROM `course`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
+function count_subject() {
+    global $db;
+    $sql = 'SELECT * FROM `subject`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
+function count_room() {
+    global $db;
+    $sql = 'SELECT * FROM `room`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
+
+function count_users() {
+    global $db;
+    $sql = 'SELECT * FROM `users`';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $count = count($results);
+
+    return $count;
+}
