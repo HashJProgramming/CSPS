@@ -1,4 +1,5 @@
 <?php
+// Hash'J Programming - hashJProgramming (Joshua Ambalong)
 require_once 'assets/php/functions/auth/authentication.php';
 require 'assets/php/functions/connection.php';
 
