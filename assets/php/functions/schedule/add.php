@@ -67,7 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt_check->execute();
 
     if ($stmt_check->rowCount() > 0) {
-        $response = array('status' => 'error', 'message' => 'Schedule already exists!');
+        $response = array('status' => 'error', 'message' => 'Schedule conflict! Please check the time and day!');
+        echo json_encode($response);
+        exit;
     } else {
         $sql = "INSERT INTO `schedule` (`time_start`, `time_end`, `teacher_id`, `block_id`, `course_id`, `subject_id`, `room_id`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`) 
                 VALUES (:start_time, :end_time, :teacher_id, :block_id, :course_id, :subject_id, :room_id, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)";

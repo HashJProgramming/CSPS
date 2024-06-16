@@ -109,13 +109,13 @@ function submitForm(formId, api, columns) {
             data: form.serialize(),
             success: function(data) {
                 var result = JSON.parse(data);
-                showSweetAlert("Success!", result.message, result.status, 2000);
+                showSweetAlert(result.status, result.message, result.status, 2000);
                 clearForm(form);
                 initializeDataTable(api, columns);
             },
             error: function(data) {
                 var result = JSON.parse(data);
-                showSweetAlert("Error!", result.message, result.status, 2000);
+                showSweetAlert(result.status, result.message, result.status, 2000);
                 clearForm(form);
             }
         });
