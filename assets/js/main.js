@@ -45,8 +45,22 @@ function initializeDataTable(api, columns) {
                 autoPrint: true,
                 exportOptions: {
                     columns: ":visible",
+                    columns: ":not(:last-child)"
                 },
                 customize: function (win) {
+                    // Add logo and institution information
+                    var logoAndInfo = '<div class="row">' +
+                        '<div class="col-md-8 col-xl-7 text-center text-primary mx-auto">' +
+                        '<img src="assets/img/print.png" width="100em">' +
+                        '<h4 class="mt-1"><strong>WEST PRIME HORIZON INSTITUTE, Inc.</strong></h4>' +
+                        '<p class="w-lg-50">V. Sagun cor. M. Roxas St. San Francisco Dist. Pagadian City<br>' +
+                        'Call No. : <strong>0920-798-3228(</strong>Smart)/<strong>0977-804-7489</strong>(Globe)</p>' +
+                        '</div>' +
+                        '</div>';
+                    $(win.document.body).prepend(logoAndInfo);
+                    var table = $(win.document.body).find('table');
+                    table.prepend('<thead><tr><th colspan="15" style="text-align: center; font-size: 10px;"> Class Schedule Plotting System </th></tr><tr><th colspan="15" style="text-align: right;" id="dateTimeHeader"> Date: ' + new Date().toLocaleString() + '</th></tr></thead>');
+                    // Style adjustments
                     $(win.document.body)
                         .find("table")
                         .addClass("display")
@@ -56,7 +70,11 @@ function initializeDataTable(api, columns) {
                         .each(function (index) {
                             $(this).css("background-color", "#D0D0D0");
                         });
-                    $(win.document.body).find("h1").css("text-align", "center");
+                    $(win.document.body).find("h1").css({
+                        "text-align": "center",
+                        "margin-top": "10px",
+                        "display": "none"
+                    });
                 },
             },
         ],
