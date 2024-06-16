@@ -114,8 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             let timerInterval;
                 Swal.fire({
                 title: "Database Initialization",
-                html: "When you press create account the system is going to generating data for the database. This process will take approximately 5 to 10 minutes. Please wait... <br> I will close in <b></b> milliseconds.",
-                timer: 300000,
+                html: "When you press create account the system is going to generating data for the database. This process will take approximately 5 to 10 minutes. <br><br> I will close in <b></b> milliseconds and then you'll be redirected to the dashboard Please wait....",
+                timer: 600000,
                 timerProgressBar: true,
                 showConfirmButton: false,
                 allowOutsideClick: false,
