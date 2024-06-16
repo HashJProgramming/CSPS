@@ -103,11 +103,11 @@ $course_name = $result['course_name'];
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-6 text-center">
-                <h3>Prepared by</h3>
+                <h4>Prepared by:</h4>
                 <p>______________________________________</p>
             </div>
             <div class="col-md-6 text-center">
-                <h3>Approved by:</h3>
+                <h4>Approved by:</h4>
                 <p>______________________________________</p>
             </div>
         </div>
