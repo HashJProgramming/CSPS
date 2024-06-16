@@ -40,7 +40,7 @@ require_once 'assets/php/functions/auth/authentication.php';
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Quick View</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;ADD SUBJECT</a>
+                        <h3 class="text-dark mb-0">Quick View</h3><a class="btn btn-primary btn-sm " role="button" href="#" data-bs-target="#add" data-bs-toggle="modal"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;ADD SUBJECT</a>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-lg-4 mb-4">
