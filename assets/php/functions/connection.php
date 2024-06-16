@@ -134,30 +134,30 @@
         ");
 
         $db->exec("
-        CREATE TABLE IF NOT EXISTS `schedule` (
-            `id` INT NOT NULL AUTO_INCREMENT,
-            `block_id` INT NOT NULL,
-            `course_id` INT NOT NULL,
-            `subject_id` INT NOT NULL,
-            `room_id` INT NOT NULL,
-            `teacher_id` INT NOT NULL,
-            `monday` BOOLEAN NOT NULL DEFAULT 0,
-            `tuesday` BOOLEAN NOT NULL DEFAULT 0,
-            `wednesday` BOOLEAN NOT NULL DEFAULT 0,
-            `thursday` BOOLEAN NOT NULL DEFAULT 0,
-            `friday` BOOLEAN NOT NULL DEFAULT 0,
-            `saturday` BOOLEAN NOT NULL DEFAULT 0,
-            `sunday` BOOLEAN NOT NULL DEFAULT 0,
-            `time_start` VARCHAR(255) NOT NULL,
-            `time_end` VARCHAR(255) NOT NULL,
-            `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (`id`),
-            FOREIGN KEY (`block_id`) REFERENCES `block`(`id`) ON DELETE CASCADE,
-            FOREIGN KEY (`course_id`) REFERENCES `course`(`id`) ON DELETE CASCADE,
-            FOREIGN KEY (`subject_id`) REFERENCES `subject`(`id`) ON DELETE CASCADE,
-            FOREIGN KEY (`room_id`) REFERENCES `room`(`id`) ON DELETE CASCADE,
-            FOREIGN KEY (`teacher_id`) REFERENCES `teacher`(`id`) ON DELETE CASCADE
-        )
+            CREATE TABLE IF NOT EXISTS `schedule` (
+                `id` INT NOT NULL AUTO_INCREMENT,
+                `block_id` INT NOT NULL,
+                `course_id` INT NOT NULL,
+                `subject_id` INT NOT NULL,
+                `room_id` INT NOT NULL,
+                `teacher_id` INT NOT NULL,
+                `monday` BOOLEAN NOT NULL DEFAULT 0,
+                `tuesday` BOOLEAN NOT NULL DEFAULT 0,
+                `wednesday` BOOLEAN NOT NULL DEFAULT 0,
+                `thursday` BOOLEAN NOT NULL DEFAULT 0,
+                `friday` BOOLEAN NOT NULL DEFAULT 0,
+                `saturday` BOOLEAN NOT NULL DEFAULT 0,
+                `sunday` BOOLEAN NOT NULL DEFAULT 0,
+                `time_start` VARCHAR(255) NOT NULL,
+                `time_end` VARCHAR(255) NOT NULL,
+                `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (`id`),
+                FOREIGN KEY (`block_id`) REFERENCES `block`(`id`) ON DELETE CASCADE,
+                FOREIGN KEY (`course_id`) REFERENCES `course`(`id`) ON DELETE CASCADE,
+                FOREIGN KEY (`subject_id`) REFERENCES `subject`(`id`) ON DELETE CASCADE,
+                FOREIGN KEY (`room_id`) REFERENCES `room`(`id`) ON DELETE CASCADE,
+                FOREIGN KEY (`teacher_id`) REFERENCES `teacher`(`id`) ON DELETE CASCADE
+            )
         ");
 
         $db->exec("
@@ -183,6 +183,53 @@
                     JOIN province p ON t.province = p.provCode
                     JOIN municipality m ON t.municipality = m.citymunCode
                     JOIN barangay b ON t.barangay = b.brgyCode;
+        ");
+
+        $db->exec("
+            CREATE VIEW IF NOT EXISTS schedule_view AS
+                SELECT 
+                    s.id,
+                    b.id AS block_id,
+                    c.id AS course_id,
+                    sub.id AS subject_id,
+                    r.id AS room_id,
+                    t.id AS teacher_id,
+                    b.name AS block_name,
+                    c.name AS course_name,
+                    sub.name AS subject_name,
+                    r.name AS room_name,
+                    s.monday,
+                    s.tuesday,
+                    s.wednesday,
+                    s.thursday,
+                    s.friday,
+                    s.saturday,
+                    s.sunday,
+                    CONCAT(t.firstname, ' ', t.lastname) AS teacher_name,
+                    CONCAT(
+                        IF(s.monday = 1, 'M', ''),
+                        IF(s.tuesday = 1, 'T', ''),
+                        IF(s.wednesday = 1, 'W', ''),
+                        IF(s.thursday = 1, 'Th', ''),
+                        IF(s.friday = 1, 'F', ''),
+                        IF(s.saturday = 1, 'Sa', ''),
+                        IF(s.sunday = 1, 'Su', '')
+                    ) AS days,
+                    s.time_start AS time_start,
+                    s.time_end AS time_end,
+                    s.created_at
+                FROM
+                    schedule s
+                JOIN
+                    block b ON s.block_id = b.id
+                JOIN
+                    course c ON s.course_id = c.id
+                JOIN
+                    subject sub ON s.subject_id = sub.id
+                JOIN
+                    room r ON s.room_id = r.id
+                JOIN
+                    teacher t ON s.teacher_id = t.id;
         ");
 
         

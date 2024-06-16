@@ -16,6 +16,7 @@ include_once 'assets/php/functions/data/get-data.php';
     <link rel="stylesheet" href="assets/css/Articles-Cards-images.css">
     <link rel="stylesheet" href="assets/css/Change-Password-floating-Label.css">
     <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
+    <link rel="stylesheet" href="assets/css/datatables.min.css">
 </head>
 
 <body id="page-top">
@@ -105,7 +106,7 @@ include_once 'assets/php/functions/data/get-data.php';
                     <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Here you can update schedule info.</p>
                     </div>
-                    <form>
+                    <form action="assets/php/functions/schedule/add.php" id="add-form">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
@@ -158,33 +159,127 @@ include_once 'assets/php/functions/data/get-data.php';
                                 <div class="col-md-4 col-xxl-8">
                                     <div class="row">
                                         <div class="col-xxl-3">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Monday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="monday"><label class="form-check-label" for="formCheck-1">Monday</label></div>
                                         </div>
                                         <div class="col-xxl-3">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Tuesday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="tuesday"><label class="form-check-label" for="formCheck-2">Tuesday</label></div>
                                         </div>
                                         <div class="col-xxl-3">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Wednesday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" name="wednesday"><label class="form-check-label" for="formCheck-3">Wednesday</label></div>
                                         </div>
                                         <div class="col">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Thursday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" name="thursday"><label class="form-check-label" for="formCheck-4">Thursday</label></div>
                                         </div>
                                         <div class="col-xxl-3">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Friday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" name="friday"><label class="form-check-label" for="formCheck-5">Friday</label></div>
                                         </div>
                                         <div class="col-xxl-3">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-6">Saturday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="saturday"><label class="form-check-label" for="formCheck-6">Saturday</label></div>
                                         </div>
                                         <div class="col">
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">Sunday</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="sunday"><label class="form-check-label" for="formCheck-7">Sunday</label></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="update">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Schedule</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-body">
+                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                        <p>Here you can update schedule info.</p>
+                    </div>
+                    <form action="assets/php/functions/schedule/update.php" id="update-form">
+                        <input type="hidden" name="id">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3"><input class="form-control" type="time" name="start_time"><label class="form-label" for="floatingInput">START</label></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3"><input class="form-control" type="time" name="end_time"><label class="form-label" for="floatingInput">END</label></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-floating mb-3"><select class="form-select" name="teacher">
+                                            <optgroup label="Selecte Teacher">
+                                                <?= teacher(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">TEACHER</label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3"><select class="form-select" name="block">
+                                            <optgroup label="Select Block">
+                                                <?= block(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">BLOCK</label></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3"><select class="form-select" name="course">
+                                            <optgroup label="Select Course">
+                                                <?= course(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">COURSE</label></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3"><select class="form-select" name="subject">
+                                            <optgroup label="Select Subject">
+                                                <?= subject(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">SUBJECT</label></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3"><select class="form-select" name="room">
+                                            <optgroup label="Select Room">
+                                                <?= room(); ?>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">ROOM</label></div>
+                                </div>
+                                <div class="col-md-4 col-xxl-8">
+                                    <div class="row">
+                                        <div class="col-xxl-3">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="monday"><label class="form-check-label" for="formCheck-1">Monday</label></div>
+                                        </div>
+                                        <div class="col-xxl-3">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="tuesday"><label class="form-check-label" for="formCheck-2">Tuesday</label></div>
+                                        </div>
+                                        <div class="col-xxl-3">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" name="wednesday"><label class="form-check-label" for="formCheck-3">Wednesday</label></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" name="thursday"><label class="form-check-label" for="formCheck-4">Thursday</label></div>
+                                        </div>
+                                        <div class="col-xxl-3">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" name="friday"><label class="form-check-label" for="formCheck-5">Friday</label></div>
+                                        </div>
+                                        <div class="col-xxl-3">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="saturday"><label class="form-check-label" for="formCheck-6">Saturday</label></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="sunday"><label class="form-check-label" for="formCheck-7">Sunday</label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -234,11 +329,14 @@ include_once 'assets/php/functions/data/get-data.php';
                     <h4 class="modal-title">Remove Course</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
+                    <form action="assets/php/functions/schedule/delete.php" id="remove-form">
+                        <input type="hidden" name="id">
+                        <div class="container text-center"><img src="assets/img/icon.jpg" width="90px">
                         <p>Are you sure want to remove this course?</p>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="button">Yes</button></div>
+                <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">No</button><button class="btn btn-danger" type="submit" data-bs-dismiss="modal">Yes</button></div>
+            </form>
             </div>
         </div>
     </div>
@@ -251,6 +349,9 @@ include_once 'assets/php/functions/data/get-data.php';
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/vanta-background.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/datatables.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/functions/schedule-main.js"></script>
 </body>
 
 </html>

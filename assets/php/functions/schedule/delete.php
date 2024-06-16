@@ -7,22 +7,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $id = $_POST['id'];
 
-    $sql_check = "SELECT * FROM `subject` WHERE `id` = :id";
+    $sql_check = "SELECT * FROM `schedule` WHERE `id` = :id";
     $stmt_check = $db->prepare($sql_check);
     $stmt_check->bindParam(':id', $id);
     $stmt_check->execute();
 
     if ($stmt_check->rowCount() > 0) {
-        $sql = "DELETE FROM `subject` WHERE `id` = :id";
+        $sql = "DELETE FROM `schedule` WHERE `id` = :id";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':id', $id);
         if ($stmt->execute()) {
-            $response = array('status' => 'success', 'message' => 'subject deleted successfully!');
+            $response = array('status' => 'success', 'message' => 'schedule deleted successfully!');
         } else {
-            $response = array('status' => 'error', 'message' => 'Failed to delete subject!');
+            $response = array('status' => 'error', 'message' => 'Failed to delete schedule!');
         }
     } else {
-        $response = array('status' => 'error', 'message' => 'subject does not exist!');
+        $response = array('status' => 'error', 'message' => 'schedule does not exist!');
     }
 } else {
     $response = array('status' => 'error', 'message' => 'Invalid request method!');
