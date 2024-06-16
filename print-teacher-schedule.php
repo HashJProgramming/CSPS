@@ -5,31 +5,43 @@ require 'assets/php/functions/connection.php';
 
 $teacher = isset($_POST['teacher']) ? $_POST['teacher'] : '';
 
-function getSchedule() {
+function getSchedule()
+{
     global $teacher, $course, $db, $teacher_name;
     $sql = "SELECT * FROM `schedule_view` WHERE teacher_id = :teacher";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':teacher', $teacher);
     $stmt->execute();
-    $result = $stmt->fetchAll(); 
+    $result = $stmt->fetchAll();
     if ($stmt->rowCount() > 0) {
-        foreach($result as $row){
-            ?>
-                <tr>
-                    <td class="text-center"><?=$row['days']?></td>
-                    <td class="text-center"><?=date('h:i A', strtotime($row['time_start']))?> - <?=date('h:i A', strtotime($row['time_end']))?></td>
-                    <td class="text-center"><?=$row['subject_name']?></td>
-                    <td class="text-center"><?=$teacher_name?></td>
-                    <td class="text-center">ROOM <?=$row['room_name']?></td>
-                </tr>
-            <?php
-        }
-    } else {
-        ?>
+        $total_units = 0;
+        foreach ($result as $row) {
+            $total_units += $row['subject_unit'];
+?>
             <tr>
-                <td colspan="5" class="text-center">No schedule found for the selected parameters.</td>
+                <td class="text-center"><?= $row['days'] ?></td>
+                <td class="text-center"><?= date('h:i A', strtotime($row['time_start'])) ?> - <?= date('h:i A', strtotime($row['time_end'])) ?></td>
+                <td class="text-center"><?= $row['subject_name'] ?></td>
+                <td class="text-center"><?= $row['subject_unit'] ?></td>
+                <td class="text-center"><?= $teacher_name ?></td>
+                <td class="text-center">ROOM <?= $row['room_name'] ?></td>
             </tr>
         <?php
+        }
+        ?>
+        <tr>
+            <td colspan="6" class="text-center">Total Units</td>
+        </tr>
+        <tr>
+            <td colspan="6" class="text-center"><?= $total_units ?></td>
+        </tr>
+    <?php
+    } else {
+    ?>
+        <tr>
+            <td colspan="5" class="text-center">No schedule found for the selected parameters.</td>
+        </tr>
+<?php
     }
 }
 
@@ -63,35 +75,40 @@ $teacher_name = $result['teacher_name'];
                 <p class="w-lg-50">V. Sagun cor. M. Roxas St. San Francisco Dist. Pagadian City<br>Call No. : <strong>0920-798-3228(</strong>Smart)/<strong>0977-804-7489</strong>(Globe)</p>
             </div>
         </div>
-        <div class="border rounded-0 border-1 border-dark table-responsive"><table class="table table-bordered">
-        <thead>
-            <tr>
-                <th colspan="6" class="bg-warning text-light text-center">STUDENT LOAD (COLLEGE DEPARTMENT)</th>
-            </tr>
-            <tr>
-                <th colspan="6" class="bg-danger text-light text-center">CSPS - Computer Schedule Plotting System</th>
-            </tr>
-            <tr>
-                <th colspan="6" class="text-center"><h3></h3></th>
-            </tr>
-            <tr>
-                <th colspan="6" class="bg-primary text-light">Teacher: <?= $teacher_name?></th>
-            </tr>
-            <tr>
-                <th class="text-center">DAY</th>
-                <th class="text-center">TIME</th>
-                <th class="text-center">SUBJECT</th>
-                <th class="text-center">TEACHER</th>
-                <th class="text-center">ROOM NO.</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- HERE -->
-             <?php
-             getSchedule();
-             ?>
-        </tbody>
-    </table></div>
+        <div class="border rounded-0 border-1 border-dark table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="6" class="bg-warning text-light text-center">STUDENT LOAD (COLLEGE DEPARTMENT)</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6" class="bg-danger text-light text-center">CSPS - Computer Schedule Plotting System</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6" class="text-center">
+                            <h3></h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="6" class="bg-primary text-light">Teacher: <?= $teacher_name ?></th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">DAY</th>
+                        <th class="text-center">TIME</th>
+                        <th class="text-center">SUBJECT</th>
+                        <th class="text-center">UNIT</th>
+                        <th class="text-center">TEACHER</th>
+                        <th class="text-center">ROOM NO.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- HERE -->
+                    <?php
+                    getSchedule();
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="container-fluid mt-5">
         <div class="row">

@@ -197,6 +197,7 @@
                     b.name AS block_name,
                     c.name AS course_name,
                     sub.name AS subject_name,
+                    sub.unit AS subject_unit,
                     r.name AS room_name,
                     s.monday,
                     s.tuesday,

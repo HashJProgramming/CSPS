@@ -8,21 +8,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Check if start time and end time are empty
     if (empty($start_time) || empty($end_time)) {
         $response = array('status' => 'error', 'message' => 'Start time and end time are required!');
         echo json_encode($response);
         exit;
     }
 
-    // Check if start time is less than 7:00 AM
     if (strtotime($start_time) < strtotime('7:00 AM')) {
         $response = array('status' => 'error', 'message' => 'Start time must be equal or greater than 7:00 AM!');
         echo json_encode($response);
         exit;
     }
     
-    // Check if end time is greater than 8:30 PM
     if (strtotime($end_time) > strtotime('8:30 PM')) {
         $response = array('status' => 'error', 'message' => 'End time must not be greater than 8:30 PM!');
         echo json_encode($response);
@@ -60,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             (:start_time < time_end AND :end_time > time_start)
             OR (:start_time < time_start AND :end_time > time_start)
             OR (:start_time = time_start AND :end_time = time_end)
-        ) AND `room_id` = :room_id AND ($dayCondition) AND `id` != :id";
+        ) AND `room_id` = :room_id AND ($dayCondition)";
         
     $stmt_check = $db->prepare($sql_check);
     $stmt_check->bindParam(':start_time', $start_time);
