@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['role'] = $user['role'];
     $_SESSION['authenticated'] = true;
 
-    header('Location: dashboard.php');
+    header('Location: assets/php/functions/init.php');
 
 }
 
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .container {
-            margin-top: 100px; /* Adjust top margin for centering */
+            margin-top: 50px; /* Adjust top margin for centering */
         }
 
         form {
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-4">
                 <div class="container text-center"><img src="assets/img/print.png" width="90px">
                 <h2 class="text-center">Create Account</h2>
-                <p>Here you can create you administrator account</p>
+                <p>Here you can create your administrator account</p>
                 <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username:</label>
@@ -97,17 +97,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" name="password" class="form-control" required>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <button type="submit" class="btn btn-primary" id="create-account-btn" onclick="disableButton()">Create Account</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/sweetalert.min.js"></script>
+    <script>
+        function disableButton() {
+            let timerInterval;
+                Swal.fire({
+                title: "Database Initialization",
+                html: "When you press create account the system is going to generating data for the database. This process will take approximately 5 to 10 minutes. Please wait... <br> I will close in <b></b> milliseconds.",
+                timer: 300000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+                });
+        }
+    </script>
 </body>
 </html>
