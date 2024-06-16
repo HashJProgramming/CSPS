@@ -298,17 +298,30 @@ include_once 'assets/php/functions/data/get-data.php';
                             <div class="row row-cols-2">
                                 <div class="col">
                                     <div class="form-floating mb-3"><select class="form-select" name="block">
-                                            <optgroup label="This is a group">
+                                            <optgroup label="Select Block">
                                                 <?= block(); ?>
                                             </optgroup>
                                         </select><label class="form-label" for="floatingInput">BLOCK</label></div>
                                 </div>
                                 <div class="col">
                                     <div class="form-floating mb-3"><select class="form-select" name="course">
-                                            <optgroup label="This is a group">
+                                            <optgroup label="Select Course">
                                                 <?= course(); ?>
                                             </optgroup>
                                         </select><label class="form-label" for="floatingInput">COURSE</label></div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating mb-3"><select class="form-select" name="semester">
+                                            <optgroup label="Select Semester">
+                                                <option value="FIRST SEMESTER">FIRST SEMESTER</option>
+                                                <option value="SECOND SEMESTER">SECOND SEMESTER</option>
+                                            </optgroup>
+                                        </select><label class="form-label" for="floatingInput">SEMESTER</label></div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" type="text" name="year" placeholder="year">
+                                        <label class="form-label" for="floatingInput">YEAR</label></div>
                                 </div>
                             </div>
                         </div>

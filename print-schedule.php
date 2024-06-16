@@ -4,6 +4,8 @@ require 'assets/php/functions/connection.php';
 
 $block = isset($_POST['block']) ? $_POST['block'] : '';
 $course = isset($_POST['course']) ? $_POST['course'] : '';
+$year = isset($_POST['year']) ? $_POST['year'] : '';
+$semester = isset($_POST['semester']) ? $_POST['semester'] : '';
 
 function getSchedule() {
     global $block, $course, $db;
@@ -74,7 +76,7 @@ $course_name = $result['course_name'];
                 <th colspan="6" class="bg-warning text-light text-center">STUDENT LOAD (COLLEGE DEPARTMENT)</th>
             </tr>
             <tr>
-                <th colspan="6" class="bg-danger text-light text-center">SECOND SEMESTER SY. 2023 - 2024</th>
+                <th colspan="6" class="bg-danger text-light text-center"><?=$semester?> SY. <?=$year?></th>
             </tr>
             <tr>
                 <th colspan="6" class="text-center"><h3><?= $block_name?> - <?= $course_name?></h3></th>
