@@ -8,7 +8,7 @@ include_once 'assets/php/functions/data/get-data.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Brand</title>
+    <title>Schedule - CSPS</title>
     <link rel="icon" type="image/png" sizes="480x480" href="assets/img/icon.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
