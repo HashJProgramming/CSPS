@@ -1,4 +1,5 @@
 <?php
+// Hash'J Programming - hashJProgramming (Joshua Ambalong)
 
 require_once '../connection.php';
 if (session_status() == PHP_SESSION_NONE) {

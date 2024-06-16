@@ -23,13 +23,11 @@ $(document).ready(function () {
       $('#update input[name="name"]').val(name);
       $('#update select[name="type"]').val(type);
       $('#update select[name="floor"]').val(floor);
-      console.log(id);
     });
   
     $(document).on("click", 'button[data-bs-target="#remove"]', function () {
       var id = $(this).data("id");
       $('#remove input[name="id"]').val(id);
-      console.log(id);
     });
   });
   

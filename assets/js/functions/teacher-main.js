@@ -50,13 +50,11 @@ $(document).ready(function () {
       $('#update select[name="barangay"]').val(barangay);
       $('#update input[name="address"]').val(address);
       $('#update input[name="phone"]').val(phone);
-      console.log(id, firstname, lastname, middlename, suffix, birthdate, sex, region, province, municipality, barangay, address, phone);
     });
   
     $(document).on("click", 'button[data-bs-target="#remove"]', function () {
       var id = $(this).data("id");
       $('#remove input[name="id"]').val(id);
-      console.log(id);
     });
   });
   

@@ -1,22 +1,6 @@
 <?php
 // Hash'J Programming - hashJProgramming (Joshua Ambalong)
-/*
- * Helper functions for building a DataTables server-side processing SQL query
- *
- * The static functions in this class are just helper functions to help build
- * the SQL used in the DataTables demo server-side processing scripts. These
- * functions obviously do not represent all that can be done with server-side
- * processing, they are intentionally simple to show how it works. More complex
- * server-side processing operations will likely require a custom script.
- *
- * See https://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - https://datatables.net/license_mit
- */
 
-
-// Please Remove below 4 lines as this is use in Datatatables test environment for your local or live environment please remove it or else it will not work
 $file = $_SERVER['DOCUMENT_ROOT'].'/datatables/pdo.php';
 if ( is_file( $file ) ) {
 	include( $file );

@@ -21,13 +21,11 @@ $(document).ready(function () {
       $('#update input[name="id"]').val(id);
       $('#update input[name="name"]').val(name);
       $('#update textarea[name="description"]').val(description);
-      console.log(id, name, description);
     });
   
     $(document).on("click", 'button[data-bs-target="#remove"]', function () {
       var id = $(this).data("id");
       $('#remove input[name="id"]').val(id);
-      console.log(id);
     });
   });
   

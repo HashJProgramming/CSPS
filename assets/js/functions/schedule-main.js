@@ -53,13 +53,11 @@ $(document).ready(function () {
     $('#update input[name="saturday"]').prop('checked', saturday);
     $('#update input[name="sunday"]').prop('checked', sunday);
 
-    console.log(id, blockId, courseId, subjectId, roomId, teacherId, startTime, endTime, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
   });
 
   $(document).on("click", 'button[data-bs-target="#remove"]', function () {
     var id = $(this).data("id");
     $('#remove input[name="id"]').val(id);
-    console.log(id);
   });
 
 
