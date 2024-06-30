@@ -23,7 +23,7 @@ function getSchedule() {
                     <td class="text-center"><?=$row['days']?></td>
                     <td class="text-center"><?=date('h:i A', strtotime($row['time_start']))?> - <?=date('h:i A', strtotime($row['time_end']))?></td>
                     <td class="text-center"><?=$row['subject_name']?></td>
-                    <td class="text-center"><?=$row['firstname']?></td>
+                    <td class="text-center"><?=$row['teacher_name']?></td>
                     <td class="text-center">ROOM <?=$row['room_name']?></td>
                 </tr>
             <?php

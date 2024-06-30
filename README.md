@@ -1,6 +1,7 @@
 # CSPS - Class Schedule Plotting System 
 CSPS - Class Schedule Plotting System  (Web Application)
-
+![alt text](image.png)
+![alt text](image-1.png)
 ## XAMPP System Specifications
 
 | Tool            | Version                             |
